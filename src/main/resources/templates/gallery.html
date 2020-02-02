@@ -16,8 +16,18 @@
     <hr>
 
     <div th:each="gallery : ${galleryList}">
-        <p th:text="${gallery.title}"></p>
-        <img th:src="${gallery.imgFullPath}" style="width: 500px; height: 300px;">
+        <div style="margin-bottom: 30px">
+            <p th:inline="text">제목 : [[${gallery.title}]]</p>
+            <img th:src="${gallery.imgFullPath}" style="width: 500px; height: 300px;">
+        </div>
+
+        <form th:action="@{/gallery}" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="id" th:value="${gallery.id}">
+            <input type="hidden" name="title" th:value="${gallery.title}">
+            <input type="hidden" name="filePath" th:value="${gallery.filePath}">
+            파일 : <input type="file" name="file"> <br>
+            <button>수정하기</button>
+        </form>
         <hr>
     </div>
 

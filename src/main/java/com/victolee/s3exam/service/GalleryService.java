@@ -32,7 +32,9 @@ public class GalleryService {
 
     private GalleryDto convertEntityToDto(GalleryEntity galleryEntity) {
         return GalleryDto.builder()
+                .id(galleryEntity.getId())
                 .title(galleryEntity.getTitle())
+                .filePath(galleryEntity.getFilePath())
                 .imgFullPath("https://" + s3Service.CLOUD_FRONT_DOMAIN_NAME + "/" + galleryEntity.getFilePath())
                 .build();
     }

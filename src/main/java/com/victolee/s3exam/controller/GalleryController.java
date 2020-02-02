@@ -30,7 +30,7 @@ public class GalleryController {
 
     @PostMapping("/gallery")
     public String execWrite(GalleryDto galleryDto, MultipartFile file) throws IOException {
-        String imgPath = s3Service.upload(file);
+        String imgPath = s3Service.upload(galleryDto.getFilePath(), file);
         galleryDto.setFilePath(imgPath);
 
         galleryService.savePost(galleryDto);
