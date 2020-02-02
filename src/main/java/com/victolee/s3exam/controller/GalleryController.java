@@ -5,11 +5,13 @@ import com.victolee.s3exam.service.GalleryService;
 import com.victolee.s3exam.service.S3Service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @AllArgsConstructor
@@ -18,7 +20,10 @@ public class GalleryController {
     private GalleryService galleryService;
 
     @GetMapping("/gallery")
-    public String dispWrite() {
+    public String dispWrite(Model model) {
+        List<GalleryDto> galleryDtoList = galleryService.getList();
+
+        model.addAttribute("galleryList", galleryDtoList);
 
         return "/gallery";
     }
